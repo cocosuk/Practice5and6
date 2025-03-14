@@ -1,0 +1,69 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0; /* Убираем отступы по умолчанию */
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрируем содержимое по горизонтали */
+  min-height: 100vh; /* Занимаем всю высоту экрана */
+  background-color: #f4f4f4;
+}
+
+header {
+  background-color: #cdcdcd;
+  padding: 20px;
+  text-align: center;
+  width: 100%; /* Занимаем всю ширину */
+}
+
+section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+}
+
+article {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  width: 300px; /* Фиксированная ширина карточки */
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-top: 0;
+}
+
+p {
+  margin: 5px 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  background-color: #f9f9f9;
+  margin: 5px 0;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+/* Медиазапрос для мобильных устройств */
+@media (max-width: 768px) {
+  section {
+    flex-direction: column; /* Карточки выстраиваются в один столбец */
+    align-items: center; /* Центрируем карточки по горизонтали */
+  }
+
+  article {
+    width: 100%; /* Карточки занимают всю ширину контейнера */
+    max-width: 400px; /* Ограничиваем максимальную ширину карточки */
+  }
+}

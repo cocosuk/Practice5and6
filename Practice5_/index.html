@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Лучшие товары месяца</title>
+  <link href="https://fonts.googleapis.com/css?family=Faster+One" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+  </header>
+
+  <section>
+  </section>
+
+  <script>
+    const apiUrl = 'http://localhost:3000/products';
+
+    async function fetchProducts() {
+      try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+          throw new Error('Ошибка при загрузке данных');
+        }
+        const data = await response.json();
+        populateHeader(data);
+        showProducts(data);
+      } catch (error) {
+        console.error('Ошибка:', error);
+      }
+    }
+
+    function populateHeader(jsonObj) {
+      const header = document.querySelector('header');
+      const myH1 = document.createElement('h1');
+      myH1.textContent = jsonObj.storeName || 'Интернет-магазин техники';
+      header.appendChild(myH1);
+
+      const myPara = document.createElement('p');
+      myPara.textContent = `Местоположение: ${jsonObj.location || 'Москва'} // Основан: ${jsonObj.established || '2020'}`;
+      header.appendChild(myPara);
+    }
+
+    function showProducts(jsonObj) {
+      const section = document.querySelector('section');
+      const products = jsonObj;
+
+      section.innerHTML = '';
+
+      products.forEach(product => {
+        const myArticle = document.createElement('article');
+        const myH2 = document.createElement('h2');
+        const myPara1 = document.createElement('p');
+        const myPara2 = document.createElement('p');
+        const myPara3 = document.createElement('p');
+        const myList = document.createElement('ul');
+
+        myH2.textContent = product.name;
+        myPara1.textContent = `Цена: ${product.price} руб.`;
+        myPara2.textContent = `Описание: ${product.description}`;
+        myPara3.textContent = 'Категории:';
+
+        product.category.forEach(category => {
+          const listItem = document.createElement('li');
+          listItem.textContent = category;
+          myList.appendChild(listItem);
+        });
+
+        myArticle.appendChild(myH2);
+        myArticle.appendChild(myPara1);
+        myArticle.appendChild(myPara2);
+        myArticle.appendChild(myPara3);
+        myArticle.appendChild(myList);
+
+        section.appendChild(myArticle);
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', fetchProducts);
+  </script>
+</body>
+</html>
